@@ -1,0 +1,14 @@
+# build outputs
+*.o
+*.obj
+*.exe
+*.out
+a.out
+build/
+bin/
+
+# editor stuff
+*.swp
+*.bak
+*~
+.DS_Store
