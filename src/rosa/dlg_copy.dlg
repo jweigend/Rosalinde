@@ -1,0 +1,7 @@
+#------------------------------------------------------------------------------
+# About
+#------------------------------------------------------------------------------
+proc DLG_CopyRight {} {
+    dialog .__dlg {Copyright} {Copyright (c) 1996 by Hannes Weigend und Christian Stoellinger} {} {} OK
+}
+

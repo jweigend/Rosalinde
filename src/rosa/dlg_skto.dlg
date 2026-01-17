@@ -1,0 +1,48 @@
+#------------------------------------------------------------------------------
+# Dialog Suche Konto
+# Variable:  konto_sel
+#------------------------------------------------------------------------------
+proc DLG_Suche_Konto { dlg } {
+    toplevel $dlg -class dialog
+
+	global dlgvar1
+    set dlgvar1 [DIALOG]
+
+    frame     $dlg.list
+    frame     $dlg.btn
+
+    listbox   $dlg.lbx_konten -relief groove -yscrollcommand "$dlg.scb_konten set"
+    scrollbar $dlg.scb_konten -command "$dlg.lbx_konten yview"
+    
+    button    $dlg.btn_uebernehmen -text "Uebernehmen" -command "$dlgvar1 ev_ok; destroy $dlg"
+    button    $dlg.btn_abbrechen   -text "Abbrechen"   -command "$dlgvar1 ev_cancel; destroy $dlg"
+
+    pack $dlg.list -side top    -anchor nw -fill x -expand 1
+    pack $dlg.btn  -side bottom -anchor sw -fill x -expand 1
+
+    pack $dlg.lbx_konten  -in $dlg.list -side left  -anchor w -fill x -expand 1 -ipadx 80
+    pack $dlg.scb_konten  -in $dlg.list -side right -anchor e -fill y
+
+    pack $dlg.btn_uebernehmen -in $dlg.btn -side left  -anchor nw  
+    pack $dlg.btn_abbrechen   -in $dlg.btn -side right -anchor ne
+
+    $dlgvar1 setproc SKTO
+    $dlgvar1 setwindowname $dlg
+
+    bind $dlg.lbx_konten <ButtonRelease-1> { 
+	    set konto_sel_index [%W curselection]
+		$dlgvar1 ev_selchange
+    }
+
+    wm title $dlg "Suche Konto"
+    wm resizable $dlg 0 0
+    grab set $dlg
+
+    # Waiting...
+    
+    $dlgvar1 ev_show
+    tkwait window $dlg
+	rename $dlgvar1 {}
+
+	unset knto_sel_index
+}

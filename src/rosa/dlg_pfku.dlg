@@ -1,0 +1,164 @@
+#------------------------------------------------------------------------------
+# Dialog fuer Pflege Kunde
+# Variable: knde_anrede
+#           knde_vorname
+#           knde_name
+#           knde_strasse
+#           knde_hausnr
+#           knde_plz
+#           knde_ort
+#           knde_land
+#           knde_rid
+#			knto_sel_index
+# Events:   ev_knde_suchen
+#           ev_knde_change
+#           ev_knde_anlegen
+#           ev_knde_konto_einhaengen
+#           ev_knde_konto_aushaengen
+#			ev_show
+#		    ev_knto_selchange
+#------------------------------------------------------------------------------
+proc DLG_Pflege_Kunden { dlg } {
+    toplevel $dlg -class dialog
+
+    global dlgvar
+    set dlgvar [DIALOG]
+
+	global stc_status
+    global knde_anrede
+    global knde_vorname
+    global knde_name
+    global knde_strasse
+    global knde_hausnr
+    global knde_plz
+    global knde_ort
+    global knde_land
+    global knde_rid
+
+    frame  $dlg.stc
+    frame  $dlg.edc
+    frame  $dlg.knto
+    frame  $dlg.btn
+    frame  $dlg.btn_kunde
+    frame  $dlg.btn_knto
+    label  $dlg.stc_status       -textvariable stc_status -relief sunken -bd 1
+    
+    label  $dlg.stc_kd_anrede    -text "Anrede:"
+    label  $dlg.stc_kd_vorname   -text "Vorname:"
+    label  $dlg.stc_kd_name      -text "Name:"
+    label  $dlg.stc_kd_strasse   -text "Strasse, Nr:"
+    label  $dlg.stc_kd_plz       -text "PLZ, Ort:"
+    label  $dlg.stc_kd_land      -text "Land:"
+    label  $dlg.stc_kd_nr        -text "Kd-Nummer:"
+
+    entry  $dlg.edc_kd_anrede    -width 6    -relief sunken -textvariable knde_anrede
+    entry  $dlg.edc_kd_vorname   -width 20   -relief sunken -textvariable knde_vorname
+    entry  $dlg.edc_kd_name      -width 20   -relief sunken -textvariable knde_name
+    frame  $dlg.frm_strasse   
+    entry  $dlg.edc_kd_strasse   -width 20   -relief sunken -textvariable knde_strasse
+    entry  $dlg.edc_kd_hausnr    -width 5    -relief sunken -textvariable knde_hausnr
+    frame  $dlg.frm_ansc         
+    entry  $dlg.edc_kd_plz       -width 5    -relief sunken -textvariable knde_plz
+    entry  $dlg.edc_kd_ort       -width 15   -relief sunken -textvariable knde_ort
+    entry  $dlg.edc_kd_land      -width 20   -relief sunken -textvariable knde_land
+    frame  $dlg.edc_suchen
+    entry  $dlg.edc_kd_nr        -width 5    -relief ridge  -textvariable knde_rid
+    button $dlg.btn_suchen       -text "Suchen"  -command "$dlgvar ev_knde_suchen"
+
+    label     $dlg.stc_knto   -text "Konten des Kunden:"
+    listbox   $dlg.lbx_knto   -relief groove -yscrollcommand "$dlg.scb_knto set"
+    scrollbar $dlg.scb_knto   -command  "$dlg.lbx_knto yview"
+
+    button $dlg.btn_close -text  "Schliessen" -command "destroy $dlg"
+    button $dlg.btn_save  -text  "Speichern"  -command "$dlgvar ev_knde_anlegen"
+
+    button $dlg.btn_knto_hinzu  -text "Konto einhaengen" -command "$dlgvar ev_knde_konto_einhaengen"
+    button $dlg.btn_knto_weg    -text "Konto aushaengen" -command "$dlgvar ev_knde_konto_aushaengen"
+
+    pack $dlg.stc_status -side bottom -anchor w  -fill x -expand 1 -padx 2m -pady 1m 
+    pack $dlg.btn        -side bottom -anchor w  -padx 3m -pady 3m -fill x -expand 1
+    pack $dlg.stc        -side left   -anchor nw -padx 3m -pady 3m
+    pack $dlg.edc        -side left   -anchor nw -padx 3m -pady 3m
+    pack $dlg.knto       -side right  -anchor nw -padx 3m -pady 3m 
+
+    pack $dlg.stc_kd_anrede  -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_vorname -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_name    -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_strasse -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_plz     -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_land    -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_nr      -in $dlg.stc -side top -anchor w -pady 4
+
+    pack $dlg.edc_kd_anrede  -in $dlg.edc          -side top  -anchor w	
+    pack $dlg.edc_kd_vorname -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.edc_kd_name    -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.frm_strasse    -in $dlg.edc          -side top  -anchor w
+    pack $dlg.edc_kd_strasse -in $dlg.frm_strasse  -side left -anchor w
+    pack $dlg.edc_kd_hausnr  -in $dlg.frm_strasse  -side left -anchor w 
+    pack $dlg.frm_ansc       -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.edc_kd_plz     -in $dlg.frm_ansc     -side left -anchor w
+    pack $dlg.edc_kd_ort     -in $dlg.frm_ansc     -side left -anchor w -expand 1 -fill x
+    pack $dlg.edc_kd_land    -in $dlg.edc          -side top  -anchor w -expand 1 -fill x
+    pack $dlg.edc_suchen     -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.edc_kd_nr      -in $dlg.edc_suchen   -side left -anchor w
+    pack $dlg.btn_suchen     -in $dlg.edc_suchen   -side left -anchor w
+
+    pack $dlg.stc_knto       -in $dlg.knto       -side top   -anchor w
+    pack $dlg.lbx_knto       -in $dlg.knto       -side left  -ipadx 30
+    pack $dlg.scb_knto       -in $dlg.knto       -side right -fill y
+
+    pack $dlg.btn_kunde      -in $dlg.btn        -side left  -anchor w
+    pack $dlg.btn_knto       -in $dlg.btn        -side left  -anchor w -fill x -expand 1
+
+    pack $dlg.btn_close      -in $dlg.btn_kunde  -side left  -anchor w
+    pack $dlg.btn_save       -in $dlg.btn_kunde  -side left  -anchor w
+
+    pack $dlg.btn_knto_hinzu -in $dlg.btn_knto   -side right -anchor e
+    pack $dlg.btn_knto_weg   -in $dlg.btn_knto   -side right -anchor e
+
+    $dlgvar setproc PFKU
+    $dlgvar setwindowname $dlg
+
+	# Events:
+    bind $dlg.edc_kd_nr      <Return>   "$dlgvar ev_knde_suchen"
+    bind $dlg.edc_kd_anrede  <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_name    <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_vorname <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_strasse <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_hausnr  <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_plz     <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_ort     <KeyPress> "$dlgvar ev_knde_change"
+    bind $dlg.edc_kd_land    <KeyPress> "$dlgvar ev_knde_change"
+
+    bind $dlg.lbx_knto <ButtonRelease-1> { 
+	    set knto_sel_index [%W curselection]
+		$dlgvar ev_knto_selchange
+    }
+
+
+    wm title $dlg "Pflege Kunde"
+    wm resizable $dlg 0 0
+    # wm transient $dlg .
+    grab set $dlg
+
+	set stc_status ""
+
+    # Waiting...
+    $dlgvar ev_show
+
+    $dlg.lbx_knto delete 0 100
+
+    tkwait window $dlg
+	rename $dlgvar {}
+    
+	unset stc_status
+    unset knde_anrede
+    unset knde_vorname
+    unset knde_name
+    unset knde_strasse
+    unset knde_hausnr
+    unset knde_plz
+    unset knde_ort
+    unset knde_land
+    unset knde_rid
+}

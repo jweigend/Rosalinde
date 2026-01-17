@@ -1,0 +1,48 @@
+#------------------------------------------------------------------------------
+# Broker
+# Variable: broker
+# Events:   ev_ok
+#------------------------------------------------------------------------------
+proc DLG_SelectBroker { dlg } {
+    toplevel $dlg -class dialog
+    
+	global dlgvar
+    global broker
+
+    set dlgvar [DIALOG]
+
+    frame $dlg.frm_edc
+    frame $dlg.frm_btn
+
+    label $dlg.stc_broker  -text "Broker:"
+    entry $dlg.edc_broker  -textvariable broker -relief sunken -width 30
+ 
+    button $dlg.btn_ok     -text "OK"        -command "$dlgvar ev_ok"
+    button $dlg.btn_cancel -text "Schliessen" -command "destroy $dlg"
+
+    pack $dlg.frm_edc -side top -padx 2m -pady 6m
+    pack $dlg.frm_btn -side top -padx 2m -pady 2m
+
+    pack $dlg.stc_broker -in $dlg.frm_edc -side left 
+    pack $dlg.edc_broker -in $dlg.frm_edc -side left
+
+    pack $dlg.btn_ok     -in $dlg.frm_btn -side left -ipadx 25
+    pack $dlg.btn_cancel -in $dlg.frm_btn -side left
+
+	$dlgvar setproc SBRO
+    $dlgvar setwindowname $dlg
+
+    $dlgvar ev_show
+
+	bind $dlg.edc_broker <Return> "$dlgvar ev_ok"
+
+    wm title $dlg "Auswahl Broker"
+    wm resizable $dlg 0 0
+    grab set $dlg
+
+    # Waiting...
+    tkwait window $dlg
+	rename $dlgvar {}
+	
+    unset broker
+}

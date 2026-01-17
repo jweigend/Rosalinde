@@ -1,0 +1,3 @@
+# quick checkout einer Datei 
+
+co -l ${AE1PATH}/RCS/$1

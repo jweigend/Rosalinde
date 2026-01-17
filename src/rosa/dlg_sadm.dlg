@@ -1,0 +1,101 @@
+#------------------------------------------------------------------------------
+# Server-Administration
+# Variable: svc_name
+#           svc_proto
+#           svc_host
+#           svc_broker
+# Events:   ev_svc_sel_service
+#           ev_svc_accept
+#           ev_svc_change
+#------------------------------------------------------------------------------
+proc DLG_ServerAdmin { dlg } {
+    toplevel $dlg -class dialog
+
+	global stc_status
+    global svc_name
+    global svc_proto
+    global svc_host
+    global svc_broker
+
+    global dlgvar
+    set dlgvar [DIALOG]
+
+    frame $dlg.frm_list
+    frame $dlg.frm_service
+    frame $dlg.frm_button
+
+    frame $dlg.frm_svc_stc
+    frame $dlg.frm_svc_edc
+
+    label     $dlg.stc_status   -textvariable stc_status -relief sunken -bd 1
+
+    label     $dlg.stc_list     -text "Verfuegbare Services:"
+    listbox   $dlg.lbx_service  -relief groove -yscrollcommand "$dlg.scb_service set"
+    scrollbar $dlg.scb_service  -command  "$dlg.lbx_service yview"
+
+    label $dlg.stc_broker       -text "Broker:"
+    label $dlg.stc_svc_name     -text "Service:"
+    label $dlg.stc_svc_prot     -text "Protokoll:"
+    label $dlg.stc_svc_host     -text "Host:"
+
+    label  $dlg.edc_svc_name -textvariable svc_name   -relief sunken -bd 1
+    label  $dlg.edc_svc_prot -textvariable svc_proto  -relief sunken -bd 1
+    label  $dlg.edc_broker   -textvariable svc_broker -relief sunken -bd 1
+    entry  $dlg.edc_svc_host -textvariable svc_host   -relief sunken -bd 1
+
+    button $dlg.btn_accept   -text "Uebernehmen" -command "$dlgvar ev_svc_accept"
+    button $dlg.btn_close    -text "Schliessen" -command "destroy $dlg"
+    
+    pack $dlg.stc_status -side bottom -anchor w  -fill x -expand 1 -padx 2m -pady 1m 
+
+    pack $dlg.frm_button  -side bottom -padx 2m -pady 2m -anchor w
+    pack $dlg.frm_list    -side left   -padx 2m -pady 2m -anchor n
+    pack $dlg.frm_service -side right  -padx 2m -pady 2m -anchor n -fill y
+
+    pack $dlg.btn_close   -in $dlg.frm_button -side left -anchor w
+
+	pack $dlg.frm_svc_stc -in $dlg.frm_service -side left  -anchor n -padx 2m -pady 2m
+    pack $dlg.frm_svc_edc -in $dlg.frm_service -side right -anchor n -padx 2m -pady 2m
+
+    pack $dlg.stc_broker     -in $dlg.frm_svc_stc -side top -pady 1m
+    pack $dlg.stc_svc_name   -in $dlg.frm_svc_stc -side top -pady 1m
+    pack $dlg.stc_svc_prot   -in $dlg.frm_svc_stc -side top -pady 1m
+    pack $dlg.stc_svc_host   -in $dlg.frm_svc_stc -side top -pady 1m
+    pack $dlg.edc_broker     -in $dlg.frm_svc_edc -side top -pady 1m -fill x
+    pack $dlg.edc_svc_name   -in $dlg.frm_svc_edc -side top -pady 1m -fill x
+    pack $dlg.edc_svc_prot   -in $dlg.frm_svc_edc -side top -pady 2m -fill x
+    pack $dlg.edc_svc_host   -in $dlg.frm_svc_edc -side top -fill x -pady 1m
+    pack $dlg.btn_accept     -in $dlg.frm_svc_edc -side bottom  -fill x -anchor w
+
+    pack $dlg.stc_list    -in $dlg.frm_list -side top -padx 1m -pady 1m
+    pack $dlg.lbx_service -in $dlg.frm_list -side left -padx 1m -pady 1m
+    pack $dlg.scb_service -in $dlg.frm_list -side right -padx 1m -pady 1m -fill y
+
+	$dlgvar setproc ADMIN
+    $dlgvar setwindowname $dlg
+
+    $dlgvar ev_show
+	
+    bind $dlg.lbx_service <ButtonRelease-1> { 
+        set svc_name [%W get [%W curselection]]
+	    $dlgvar ev_svc_sel_service
+    }
+
+    bind $dlg.edc_svc_host <KeyPress> "$dlgvar ev_svc_change"
+
+    bind $dlg.edc_svc_host <Return> "$dlgvar ev_svc_accept"
+
+	wm title $dlg "Server Administration"
+    wm resizable $dlg 0 0
+    grab set $dlg
+
+    # Waiting...
+    tkwait window $dlg
+	rename $dlgvar {}
+
+	unset stc_status
+    unset svc_name
+    unset svc_proto
+    unset svc_host
+    unset svc_broker
+}

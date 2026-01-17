@@ -1,0 +1,92 @@
+#-----------------------------------------------------------------------
+# Dialog fuer Pflege Konten
+# Variable: knto_rid
+#           knto_nr
+#           knto_blz
+#           knto_bank
+# Events:   ev_knto_suchen
+#           ev_knto_anlegen
+#           ev_knto_change
+#           ev_show
+#-----------------------------------------------------------------------
+proc DLG_Pflege_Konten { dlg } {
+    toplevel $dlg -class dialog
+
+    set dlgvar [DIALOG]
+	global knto_rid
+    global knto_nr
+    global knto_blz
+    global knto_bank
+    global stc_status
+
+	# Definition der Controls
+    label  $dlg.stc_status  -textvariable stc_status -relief sunken -bd 1
+    frame  $dlg.stc
+    frame  $dlg.edc
+    frame  $dlg.btn
+
+    label  $dlg.stc_konto_id   -text "Konto-ID:"
+    label  $dlg.stc_konto_nr   -text "Konto-Nr:"
+    label  $dlg.stc_konto_blz  -text "BLZ:"
+    label  $dlg.stc_konto_bank -text "Bank:"
+
+    frame  $dlg.frm_suchen
+    entry  $dlg.edc_konto_id   -relief sunken -width 10 -relief ridge -textvariable knto_rid
+    button $dlg.btn_suchen     -text "Suchen" -command "$dlgvar ev_knto_suchen"
+    entry  $dlg.edc_konto_nr   -relief sunken -width 10 -textvariable knto_nr
+    entry  $dlg.edc_konto_blz  -relief sunken -width 10 -textvariable knto_blz
+    entry  $dlg.edc_konto_bank -relief sunken -width 30 -textvariable knto_bank
+
+    button $dlg.btn_close -text "Schliessen" -command "destroy $dlg"
+    button $dlg.btn_save  -text "Speichern"  -command "$dlgvar ev_knto_anlegen"
+    
+	# Anordnung der Controls
+    pack $dlg.stc_status -side bottom -anchor w -fill x -expand 1 -padx 2m -pady 1m
+    pack $dlg.btn        -side bottom -anchor w -padx 3m -pady 3m -fill x -expand 1
+    pack $dlg.stc        -side left   -anchor w -padx 3m -pady 3m
+    pack $dlg.edc        -side left   -anchor nw -padx 3m -pady 3m
+
+    pack $dlg.stc_konto_id     -in $dlg.stc -side top -anchor w -pady 6
+    pack $dlg.stc_konto_nr     -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_konto_blz    -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_konto_bank   -in $dlg.stc -side top -anchor w -pady 2
+
+    pack $dlg.frm_suchen       -in $dlg.edc        -side top  -anchor w -pady 2
+    pack $dlg.edc_konto_id     -in $dlg.frm_suchen -side left -anchor w
+    pack $dlg.btn_suchen       -in $dlg.frm_suchen -side left -anchor w
+    pack $dlg.edc_konto_nr     -in $dlg.edc        -side top  -anchor w
+    pack $dlg.edc_konto_blz    -in $dlg.edc        -side top  -anchor w
+    pack $dlg.edc_konto_bank   -in $dlg.edc        -side top  -anchor w
+
+    pack $dlg.btn_close        -in $dlg.btn -side left -anchor w
+    pack $dlg.btn_save         -in $dlg.btn -side left -anchor w
+
+	# Dialog-Procedure einhaengen
+    $dlgvar setproc PFKO
+    $dlgvar setwindowname $dlg
+
+	# Events:
+    bind $dlg.edc_konto_id   <Return>   "$dlgvar ev_knto_suchen"
+    bind $dlg.edc_konto_nr   <KeyPress> "$dlgvar ev_knto_change"
+    bind $dlg.edc_konto_blz  <KeyPress> "$dlgvar ev_knto_change"
+    bind $dlg.edc_konto_bank <KeyPress> "$dlgvar ev_knto_change"
+
+	$dlgvar ev_show
+
+    wm title $dlg "Pflege Konto"
+    wm resizable $dlg 0 0
+    # wm transient $dlg .
+    grab set $dlg
+
+    # Waiting...
+    tkwait window $dlg
+	rename $dlgvar {}
+
+	unset knto_rid
+    unset knto_nr
+    unset knto_blz
+    unset knto_bank
+    unset stc_status
+ 
+}
+

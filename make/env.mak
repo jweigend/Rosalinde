@@ -1,0 +1,82 @@
+# -----------------------------------------------------------------------
+#	Dateiname:		$RCSfile: env.mak,v $									
+#	Version:		$Revision: 1 $									
+#	Erstellt am:	00.00.96											
+#	Geaendert am:	$Date: 4/13/97 1:18p $							
+#	Komponente:		GLOB											
+#	Erstellt von:	Johannes Weigend
+#	Geandert von:	$Author: Hannes $										
+#	Copyright:		Fachhochschule Rosenheim, Anwendungsentwicklung, 1996
+#	Bermerkung:		Tabstop = 4												
+# ------------------------------------------------------------------------
+
+
+#
+# ROOT - Directory (edit this)
+#
+
+# ------------------------------------------------------------------------
+
+ROSA 	= $(HOME)/Rosalinde
+
+LIBDIR 	= $(ROSA)/lib
+
+#TCL_LIBDIR = $(LIBDIR) -L /usr/lib -L /usr/X11R6/lib
+TCL_LIBDIR = $(LIBDIR) -L/usr/local/lib -L/usr/openwin/lib
+
+
+INCLUDE = . -I$(ROSA)/include
+
+#TCL_INCLUDE = $(INCLUDE) -I/usr/include/tcl
+TCL_INCLUDE = $(INCLUDE) -I/usr/local/include -I/usr/openwin/include 
+# ------------------------------------------------------------------------
+
+#
+# TOOLS
+#
+
+# ------------------------------------------------------------------------
+
+#
+# C-Compiler
+#
+#CC 	= purify cc 
+CC		= cc
+
+# -D_DEBUG fuer Memory-Debugging
+# -DRPC_SVC_FG  fuer SUN Foreground process
+CFLAGS 	= -g -DRPC_SVC_FG
+
+#
+# Librarian
+#
+AR		= ar
+
+ARFLAGS = r
+
+# Static - libs
+LIBS 	=
+
+TCL_LIBS =  $(LIBS) -ltk4.0 -ltcl7.4 -lX11 -lm 
+#TCL_LIBS = -ltk -ltcl -lX11 -lm
+# ------------------------------------------------------------------------
+
+#
+# Suffix Rules
+#
+.c.o :
+	$(CC) $(CFLAGS) -I$(TCL_INCLUDE) -c $< -o $@
+
+.a:
+	$(AR) $(ARFLAGS) $@ $<
+
+
+CFLAGS += -I/usr/include/tirpc
+LDLIBS += -ltirpc
+
+CFLAGS += -I/usr/include/tcl8.6
+LDLIBS += -ltk8.6 -ltcl8.6
+
+
+
+# ------------------------------------------------------------------------

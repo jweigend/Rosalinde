@@ -1,0 +1,8 @@
+FILES=`ls`
+
+for i in $FILES
+do
+dos2unix $i >/tmp/$i
+mv /tmp/$i $i
+done
+

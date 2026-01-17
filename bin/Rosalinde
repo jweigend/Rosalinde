@@ -1,0 +1,87 @@
+clear
+echo "----------------------------------------------------------------"
+echo "           =================================                    "
+echo "           R   O   S   A   L   I   N   D   E                    "
+echo "           =================================                    "
+echo "   Rosenheim Application Link for a Distributed Environment     "
+echo "         (c) Fachhochschule Rosenheim  1996                     "
+echo "                                                                " 
+echo "Anwendungsentwicklung (Verteilte Systeme)                       "
+echo "                                                                "
+echo "Konzeption, Systemdesign und Programmierung:                    "
+echo "     Prof. Dr. Johannes Siedersleben                            "
+echo "                                                                "
+echo "Design und Programmierung:                                      "
+echo "     Johannes Weigend                                           "
+echo "     Christian Stoellinger                                      "
+echo "                                        MAERZ - JULI 1996       " 
+echo "----------------------------------------------------------------"
+echo 
+
+echo Bitte geben Sie den Brokerhost ein :
+read BROKER
+
+echo Starte alle Server auf dem lokalen Rechner ...
+
+../exe/r_brok_svc & 
+sleep 2     
+BROK_SVC_PID=$!
+
+../exe/r_btab_knde_svc $BROKER 2>r_btab_knde_svc.log &
+sleep 2
+KNDE_BTAB_SVC_PID=$!
+
+../exe/r_btab_knto_svc $BROKER 2>r_btab_knto_svc.log &
+sleep 2
+KNTO_BTAB_SVC_PID=$!
+
+../exe/r_knto_svc $BROKER 2>r_knto_svc.log &
+sleep 2
+KNTO_SVC_PID=$!
+
+../exe/r_knde_svc $BROKER 2>r_knde_svc.log &
+sleep 2
+KNDE_SVC_PID=$!
+
+echo Starte GUI ...
+cd ../src/rosa
+rosa_rpc.tk $BROKER 2>rosa_rpc.log &  
+sleep 2
+ROSA_PID=$!
+
+clear
+echo DONE.
+echo "----------------------------------------------------------------"
+echo "           =================================                    "
+echo "           R   O   S   A   L   I   N   D   E                    "
+echo "           =================================                    "
+echo "   Rosenheim Application Link for a Distributed Environment     "
+echo "         (c) Fachhochschule Rosenheim  1996                     "
+echo "                                                                " 
+echo "Anwendungsentwicklung (Verteilte Systeme)                       "
+echo "                                                                "
+echo "Konzeption, Systemdesign und Programmierung:                    "
+echo "     Prof. Dr. Johannes Siedersleben                            "
+echo "                                                                "
+echo "Design und Programmierung:                                      "
+echo "     Johannes Weigend                                           "
+echo "     Christian Stoellinger                                      "
+echo "                                        MAERZ - JULI 1996       " 
+echo "----------------------------------------------------------------"
+echo 
+echo ------------------------
+echo C T R L - D to shutdown.
+echo ------------------------
+cat
+
+echo Shutdown ...
+
+kill -HUP $BROK_SVC_PID 2>/dev/null
+kill -HUP $KNDE_BTAB_SVC_PID 2>/dev/null
+kill -HUP $KNTO_BTAB_SVC_PID 2>/dev/null
+kill -HUP $KNTO_SVC_PID 2>/dev/null
+kill -HUP $KNDE_SVC_PID 2>/dev/null
+kill -HUP $ROSA_PID 2>/dev/null
+
+clear
+echo DONE.

@@ -1,0 +1,42 @@
+#!/bin/sh
+# next line start wish \
+exec rosa_rpc "$0" "$@" 
+
+########################################################################
+# Mainfile fuer Rosalinde
+########################################################################
+
+# Automatisches Update der benoetigten Files
+auto_mkindex . *.tcl *.dlg
+set auto_path \
+      [linsert $auto_path 0 .]
+
+#-----------------------------------------------------------------------
+# Hauptfenster
+#-----------------------------------------------------------------------
+frame .menu_bar -relief raised -bd 2
+frame .dummy -width 10c -height 5c
+pack .menu_bar .dummy -side top -fill x
+
+menubutton .menu_bar.daten -text "Stammdaten" -menu .menu_bar.daten.menu
+ menu .menu_bar.daten.menu
+  .menu_bar.daten.menu add command -label "Pflege Kunden"  -command "DLG_Pflege_Kunden .dlg"
+  .menu_bar.daten.menu add command -label "Plfege Konten"  -command "DLG_Pflege_Konten .dlg"
+  .menu_bar.daten.menu add separator
+  .menu_bar.daten.menu add command -label "Beenden" -command exit 
+pack .menu_bar.daten -side left
+
+menubutton .menu_bar.optionen -text "Administration" -menu .menu_bar.optionen.menu
+ menu .menu_bar.optionen.menu
+  .menu_bar.optionen.menu add command -label "Server Administration"  -command "DLG_ServerAdmin .dlg"
+  .menu_bar.optionen.menu add command -label "Broker Auswahl"         -command "DLG_SelectBroker .dlg"
+pack .menu_bar.optionen -side left
+
+menubutton .menu_bar.about -text "Ueber.." -menu .menu_bar.about.menu
+ menu .menu_bar.about.menu
+  .menu_bar.about.menu add command -label "Copyright" -command  DLG_CopyRight
+  .menu_bar.about.menu add command -label "Ueber Rosalinde" -command DLG_AboutAE10
+pack .menu_bar.about -side right
+
+wm minsize . 600 400
+wm title . "Rosalinde - C/S"

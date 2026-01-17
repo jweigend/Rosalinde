@@ -1,0 +1,285 @@
+#!/bin/sh
+# next line start wish \
+exec rosa_rpc "$0" "$@"
+
+#
+# Mainfile fuer AE10
+#
+
+proc dialog { w title text bitmap default args } {
+    global button
+    
+    # Top-level-Window
+    toplevel $w -class Dialog
+    wm title $w $title
+    wm iconname $w Dialog
+    frame $w.top -relief raised -bd 1
+    pack $w.top -side top -fill both
+    frame $w.bot -relief raised -bd 1
+    pack $w.bot -side bottom -fill both
+
+    # Message und Buttons
+    message $w.top.msg -width 3i -text $text\
+            -font -Adobe-Times-Medium-R-Normal-*-140-*
+    pack $w.top.msg -side right -expand 1 -fill both -padx 3m -pady 3m
+    if {$bitmap != ""} {
+        label $w.top.bitmap -bitmap $bitmap
+        pack $w.top.bitmap -side left -padx 3m -pady 3m
+    }
+
+    # Buttons
+    set i 0
+    foreach but $args {
+        button $w.bot.button$i -text $but -command "set button $i"
+        if {$i==$default} {
+            frame $w.bot.default -relief sunken -bd 1
+            raise $w.bot.button$i
+            pack $w.bot.default -side left -expand 1 -padx 3m -pady 2m
+            pack $w.bot.button$i -in $w.bot.default -side left -padx 2m -pady 2m -ipadx 2m -ipady 1m
+        } else {
+            pack $w.bot.button$i -side left -expand 1 -padx 3m -pady 3m -ipadx 2m -ipady 1m
+        }
+        incr i
+    }
+
+    #Bindings
+    if {$default >= 0} {
+        bind $w <Return> "$w.bot.button$default flash; set button $default"
+    }
+    set oldFocus [focus]
+    grab set $w
+    focus $w
+
+    # Waiting...
+    tkwait variable button
+    destroy $w
+    focus $oldFocus
+    return $button
+    
+}
+
+
+#------------------------------------------------------------------------------
+# About
+#------------------------------------------------------------------------------
+proc DLG_AboutAE10 {} {
+    dialog .dlg {Ueber AE10} {Beta-Version von AE10-C/S} {} {} OK
+}
+
+
+#------------------------------------------------------------------------------
+# Copyright
+#------------------------------------------------------------------------------
+proc DLG_CopyRight {} {
+    dialog .dlg {Copyright} {Copyright (c) by Christian Stoellinger und Johannes Weigend} {} {} OK
+}
+
+
+#------------------------------------------------------------------------------
+# Dialog Suche Konto
+#------------------------------------------------------------------------------
+proc DLG_Suche_Konto { dlg } {
+    toplevel $dlg -class dialog
+
+    frame     $dlg.list
+    frame     $dlg.btn
+
+    listbox   $dlg.lbx_konten -relief groove -yscrollcommand "$dlg.scb_konten set"
+    scrollbar $dlg.scb_konten -command "$dlg.lbx_konten yview"
+    
+    button    $dlg.btn_uebernehmen -text "Uebernehmen" -command "destroy $dlg"
+    button    $dlg.btn_abbrechen   -text "Abbrechen"   -command "destroy $dlg"
+
+    pack $dlg.list -side top    -anchor nw -fill x -expand 1
+    pack $dlg.btn  -side bottom -anchor sw -fill x -expand 1
+
+    pack $dlg.lbx_konten  -in $dlg.list -side left  -anchor w -fill x -expand 1 -ipadx 50
+    pack $dlg.scb_konten  -in $dlg.list -side right -anchor e -fill y
+
+    pack $dlg.btn_uebernehmen -in $dlg.btn -side left  -anchor nw  
+    pack $dlg.btn_abbrechen   -in $dlg.btn -side right -anchor ne
+
+    foreach i [lsort [glob *]] {
+        $dlg.lbx_konten insert end $i 
+    }
+
+    wm title $dlg "Suche Konto"
+    grab set $dlg
+}
+
+
+#------------------------------------------------------------------------------
+# Dialog fuer Pflege Kunde
+#------------------------------------------------------------------------------
+proc DLG_Pflege_Kunden { dlg } {
+    toplevel $dlg -class dialog
+
+    set dlgvar [DIALOG]
+
+    frame  $dlg.stc
+    frame  $dlg.edc
+    frame  $dlg.knto
+    frame  $dlg.btn
+    frame  $dlg.btn_kunde
+    frame  $dlg.btn_knto
+    
+    label  $dlg.stc_kd_anrede    -text "Anrede:"
+    label  $dlg.stc_kd_vorname   -text "Vorname:"
+    label  $dlg.stc_kd_name      -text "Name:"
+    label  $dlg.stc_kd_strasse   -text "Strasse, Nr:"
+    label  $dlg.stc_kd_plz       -text "PLZ, Ort:"
+    label  $dlg.stc_kd_land      -text "Land:"
+    label  $dlg.stc_kd_nr        -text "Kd-Nummer:"
+
+    entry  $dlg.edc_kd_anrede    -width 6    -relief sunken -textvariable kd_anrede
+    entry  $dlg.edc_kd_vorname   -width 30   -relief sunken -textvariable kd_vorname
+    entry  $dlg.edc_kd_name      -width 30   -relief sunken -textvariable kd_name
+    frame  $dlg.frm_strasse   
+    entry  $dlg.edc_kd_strasse   -width 30   -relief sunken -textvariable kd_strasse
+    entry  $dlg.edc_kd_hausnr    -width 5    -relief sunken -textvariable kd_hausnr
+    frame  $dlg.frm_ansc         
+    entry  $dlg.edc_kd_plz       -width 5    -relief sunken -textvariable kd_plz
+    entry  $dlg.edc_kd_ort       -width 23   -relief sunken -textvariable kd_ort
+    entry  $dlg.edc_kd_land      -width 30   -relief sunken -textvariable kd_land
+    frame  $dlg.edc_suchen
+    entry  $dlg.edc_kd_nr        -width 5    -relief ridge   -textvariable kd_rid
+    button $dlg.btn_suchen       -text "Suchen"  -command "$dlgvar kd_suchen"
+
+    label     $dlg.stc_knto   -text "Konten des Kunden:"
+    listbox   $dlg.lbx_knto   -relief groove -yscrollcommand "$dlg.scb_knto set"
+    scrollbar $dlg.scb_knto   -command  "$dlg.lbx_knto yview"
+
+    button $dlg.btn_close -text  "Schliessen" -command "destroy $dlg"
+    button $dlg.btn_save  -text  "Speichern"  -command "$dlgvar kd_anlegen"
+
+    button $dlg.btn_knto_hinzu  -text "Konto einhaengen" -command "DLG_Suche_Konto  $dlg.dlg"
+    button $dlg.btn_knto_weg    -text "Konto aushaengen"
+
+    pack $dlg.btn   -side bottom -anchor w  -padx 3m -pady 3m -fill x -expand 1
+    pack $dlg.stc   -side left   -anchor nw -padx 3m -pady 3m
+    pack $dlg.edc   -side left   -anchor nw -padx 3m -pady 3m
+    pack $dlg.knto  -side right  -anchor nw -padx 3m -pady 3m 
+
+    pack $dlg.stc_kd_anrede  -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_vorname -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_name    -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_strasse -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_plz     -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_land    -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_kd_nr      -in $dlg.stc -side top -anchor w -pady 4
+
+    pack $dlg.edc_kd_anrede  -in $dlg.edc          -side top  -anchor w	
+    pack $dlg.edc_kd_vorname -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.edc_kd_name    -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.frm_strasse    -in $dlg.edc          -side top  -anchor w
+    pack $dlg.edc_kd_strasse -in $dlg.frm_strasse  -side left -anchor w
+    pack $dlg.edc_kd_hausnr  -in $dlg.frm_strasse  -side left -anchor w 
+    pack $dlg.frm_ansc       -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.edc_kd_plz     -in $dlg.frm_ansc     -side left -anchor w
+    pack $dlg.edc_kd_ort     -in $dlg.frm_ansc     -side left -anchor w -expand 1 -fill x
+    pack $dlg.edc_kd_land    -in $dlg.edc          -side top  -anchor w -expand 1 -fill x
+    pack $dlg.edc_suchen     -in $dlg.edc          -side top  -anchor w -fill x -expand 1
+    pack $dlg.edc_kd_nr      -in $dlg.edc_suchen   -side left -anchor w
+    pack $dlg.btn_suchen     -in $dlg.edc_suchen   -side left -anchor w
+
+    pack $dlg.stc_knto       -in $dlg.knto       -side top   -anchor w
+    pack $dlg.lbx_knto       -in $dlg.knto       -side left  -ipadx 50
+    pack $dlg.scb_knto       -in $dlg.knto       -side right -fill y
+
+    pack $dlg.btn_kunde      -in $dlg.btn        -side left  -anchor w
+    pack $dlg.btn_knto       -in $dlg.btn        -side left  -anchor w -fill x -expand 1
+
+    pack $dlg.btn_close      -in $dlg.btn_kunde  -side left  -anchor w
+    pack $dlg.btn_save       -in $dlg.btn_kunde  -side left  -anchor w
+
+    pack $dlg.btn_knto_hinzu -in $dlg.btn_knto   -side right -anchor e
+    pack $dlg.btn_knto_weg   -in $dlg.btn_knto   -side right -anchor e
+
+
+    ## Fuellen der Listbox mit aktuellen Verzeichnis
+    foreach i [lsort [glob *]] {
+        $dlg.lbx_knto insert end $i
+    }
+
+    $dlgvar setproc PFKU
+    $dlgvar setwindowname $dlg
+
+    wm title $dlg "Pflege Kunde"
+    grab set $dlg
+    unset dlgvar
+}
+
+#-----------------------------------------------------------------------
+# Dialog fuer Pflege Konten
+#-----------------------------------------------------------------------
+proc DLG_Pflege_Konten { dlg } {
+    toplevel $dlg -class dialog
+
+    frame  $dlg.stc
+    frame  $dlg.edc
+    frame  $dlg.btn
+
+    label  $dlg.stc_konto_nr   -text "Konto-Nr:"
+    label  $dlg.stc_konto_blz  -text "BLZ:"
+    label  $dlg.stc_konto_bank -text "Bank:"
+
+    frame  $dlg.frm_suchen
+    entry  $dlg.edc_konto_nr   -relief sunken -width 10 -relief ridge
+    button $dlg.btn_suchen     -text "Suchen"
+    entry  $dlg.edc_konto_blz  -relief sunken -width 10
+    entry  $dlg.edc_konto_bank -relief sunken -width 30
+
+    button $dlg.btn_close -text "Schliessen" -command "destroy $dlg"
+    button $dlg.btn_save  -text "Speichern"
+    
+    pack $dlg.btn -side bottom -anchor w -padx 3m -pady 3m -fill x -expand 1
+    pack $dlg.stc -side left   -anchor w -padx 3m -pady 3m
+    pack $dlg.edc -side left   -anchor nw -padx 3m -pady 3m
+
+    pack $dlg.stc_konto_nr     -in $dlg.stc -side top -anchor w -pady 6
+    pack $dlg.stc_konto_blz    -in $dlg.stc -side top -anchor w -pady 2
+    pack $dlg.stc_konto_bank   -in $dlg.stc -side top -anchor w -pady 2
+
+    pack $dlg.frm_suchen       -in $dlg.edc        -side top  -anchor w -pady 2
+    pack $dlg.edc_konto_nr     -in $dlg.frm_suchen -side left -anchor w
+    pack $dlg.btn_suchen       -in $dlg.frm_suchen -side left -anchor w
+    pack $dlg.edc_konto_blz    -in $dlg.edc        -side top  -anchor w
+    pack $dlg.edc_konto_bank   -in $dlg.edc        -side top  -anchor w
+
+    pack $dlg.btn_close        -in $dlg.btn -side left -anchor w
+    pack $dlg.btn_save         -in $dlg.btn -side left -anchor w
+
+    wm title $dlg "Pflege Konto"
+    grab set $dlg
+}
+
+
+#-----------------------------------------------------------------------
+# Hauptfenster
+#-----------------------------------------------------------------------
+frame .menu_bar -relief raised -bd 2
+frame .dummy -width 10c -height 5c
+pack .menu_bar .dummy -side top -fill x
+
+menubutton .menu_bar.daten -text "Stammdaten" -menu .menu_bar.daten.menu
+ menu .menu_bar.daten.menu
+  .menu_bar.daten.menu add command -label "Pflege Kunden"  -command "DLG_Pflege_Kunden .dlg"
+  .menu_bar.daten.menu add command -label "Plfege Konten"  -command "DLG_Pflege_Konten .dlg"
+  .menu_bar.daten.menu add separator
+  .menu_bar.daten.menu add command -label "Beenden" -command exit 
+pack .menu_bar.daten -side left
+
+menubutton .menu_bar.optionen -text "Optionen" -menu .menu_bar.optionen.menu
+ menu .menu_bar.optionen.menu
+  .menu_bar.optionen.menu add command -label "Server"  -command PRC_Server
+  .menu_bar.optionen.menu add command -label "Objekte" -command PRC_Objekte
+pack .menu_bar.optionen -side left
+
+menubutton .menu_bar.about -text "Ueber.." -menu .menu_bar.about.menu
+ menu .menu_bar.about.menu
+  .menu_bar.about.menu add command -label "Copyright" -command  DLG_CopyRight
+  .menu_bar.about.menu add command -label "Ueber AE10" -command DLG_AboutAE10
+pack .menu_bar.about -side right
+
+wm minsize . 200 100
+wm title . "AE10 - C/S"

@@ -1,0 +1,137 @@
+/* ------------------------------------------------------------------------
+|   Dateiname:      $RCSfile: brok.c,v $
+|   Version:        $Revision: 1 $
+|   Erstellt am:    00.00.96
+|   Geaendert am:   $Date: 19.11.97 9:36 $
+|   Komponente:     BROKER
+|   Erstellt von:   Johannes Weigend
+|   Geandert von:   $Author: Johannes $
+|   Copyright:      Fachhochschule Rosenheim, Anwendungsentwicklung, 1996
+|   Bermerkung:     Tabstop = 4
+---------------------------------------------------------------------------*/
+
+
+#include "brok.h"
+
+static brok derBroker;  /* Singleton-Object */
+
+void brok_init () {
+
+    hash_init (&(derBroker.hashtab), BROKER_HASH_TAB_SIZE);
+}
+
+void brok_clear () {
+
+    hash_clear (&(derBroker.hashtab), TRUE);
+}
+
+/*  haengt einen broker-entry Eintrag an die Brokerlist an
+    RC: OK                   wenn alles klappt
+        DUPLICATE_SVC_ENTRY  fuer doppelte Registrierung 
+        BROKER_REMOVED_ENTRY entfernt da ping() fehlschlug */
+RC brok_register (bent * be) {
+
+    bent * lbe;
+
+    Assert (be);
+    Assert (be->svcn && (be->prgnr >= MIN_RPC_PRG_ID) && be->host);
+
+    lbe = hash_get (&(derBroker.hashtab), (void *) be, bent_hash_fnk, bent_cmp);
+
+    if (lbe) {
+
+            /* Hier ist der gefundene Eintrag identisch */
+        if (bent_cmp_all (lbe, be) == 0) {
+
+            LOG ("[BROK_SVC]: Eintrag schon vorhanden: ");
+            bent_print (lbe);
+            return DUPLICATE_SVC_ENTRY;
+        }
+            /* Nicht identisch, also aendern */
+        bent_copy (be, lbe);
+        LOG ("[BROK_SVC]: Vorhandener Eintrag wurde geaendert.");
+        bent_print (lbe);
+        LOG ("[BROK_SVC]: Geaenderter Eintrag.");
+        bent_print (be);
+        return OK;
+    }
+
+
+        /* OK Neuen Eintrag anlegen */
+    lbe = bent_new ();
+    Assert (lbe);
+        /* Fuellen */
+    bent_copy (be, lbe);
+        /* Einhaengen */
+    hash_insert (&(derBroker.hashtab), (void *) lbe, bent_hash_fnk);
+
+    LOG ("[BROK_SVC]: Registriert: ");
+    bent_print (lbe);
+
+    return OK;
+}
+
+/*  deregistriert einen Service:
+    RC: OK
+        SVC_NOT_REGISTERED  fuer nicht gefundene Servicenamen */
+RC brok_unregister (char * svcn) {
+
+    bent b;
+    bent * removedBrokerEntry;
+
+    Assert (svcn);
+
+    bent_init (&b);
+    bent_set_svcn (&b, svcn);   /* Der svcn ist der Schluessel */
+
+    removedBrokerEntry = hash_remove (&(derBroker.hashtab), (void *) &b, bent_hash_fnk, bent_cmp);
+
+    if (removedBrokerEntry == NULL) {
+         LOG ("[BROK_SVC]: svc: &s nicht gefunden\n", svcn);
+         return SVC_NOT_REGISTERED;
+    }
+    LOG ("[BROK_SVC]: Deregistriert: ");
+    bent_print (removedBrokerEntry);
+
+        /* Eintrag loeschen */
+    free (removedBrokerEntry);
+
+    return OK;
+}
+
+
+/*  Fuellt be mit dem gefunden Eintrag:
+    RC: OK
+        SVC_NOT_REGISTERED  fuer nicht gefundene Servicenamen */
+
+RC brok_bind (char * svcn, bent * b) {
+
+    bent be;
+    bent * lbe;
+
+    Assert (svcn);
+    Assert (b);
+
+    bent_set_svcn (&be, svcn);
+
+    lbe = hash_get (&(derBroker.hashtab), (void *) &be, bent_hash_fnk, bent_cmp);
+    if (! lbe) {
+        LOG ("\n[BROK_SVC]: bind nicht erfolgreich: Service %s not found.\n", svcn);
+        return SVC_NOT_REGISTERED;
+    }
+    bent_copy (lbe, b);
+
+    LOG ("[BROK_SVC]: bind: ");
+    bent_print (b);
+
+    return OK;
+}
+
+
+    /* druckt alle Brokerentrys aus */
+void brok_print () {
+
+    hash_print (&(derBroker.hashtab), bent_print);
+}
+
+

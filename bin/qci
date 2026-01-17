@@ -1,0 +1,6 @@
+# quick Check In mehrerer Dateien
+
+for x in $@ 
+do
+	ci $x  ${AE10PATH}/RCS/$x 
+done
