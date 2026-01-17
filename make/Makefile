@@ -60,7 +60,7 @@ local : local_libs tt
 #
 # Testtreiber (Programs for systemtesting) (make tt)
 #
-tt : tt_otab tt_btab tt_knde tt_brok tt_knto tt_knde_knto gen tt_strg tt_hash tt_list tt_log tt_misc
+tt : libs tt_otab tt_btab tt_knde tt_brok tt_knto tt_knde_knto gen tt_strg tt_hash tt_list tt_log tt_misc
 
 #
 # Test-Daten
