@@ -15,7 +15,7 @@ KNDE_FILES = $(ROSA)/src/adt/knde/knde.o \
              $(ROSA)/src/adt/knde/tt_knde.o
 
 tt_knde : $(KNDE_FILES)
-	$(CC) $(CFLAGS) -L$(LIBDIR) $(KNDE_FILES) -lbtab_local -lotab_local -lutil -lsadm_local -lbrok_local -llocal -ladrs_local -ldbms_local -lknto_local $(LIBS) 
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(KNDE_FILES) -lbtab_local -lotab_local -lutil -lsadm_local -lbrok_local -llocal -ladrs_local -ldbms_local -lknto_local $(LIBS) $(LDLIBS) 
 	mv a.out ../exe/$@ 
 
 

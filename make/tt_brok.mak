@@ -11,5 +11,5 @@
 # ------------------------------------------------------------------------
 
 tt_brok : $(ROSA)/src/brok/tt_brok.o
-	$(CC) $(CFLAGS) -L$(LIBDIR)  $(ROSA)/src/brok/tt_brok.o -lbrok_local -lutil
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/src/brok/tt_brok.o -lbrok_local -lutil $(LDLIBS)
 	mv a.out ../exe/tt_brok 

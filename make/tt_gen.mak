@@ -12,5 +12,5 @@
 
 
 gen : $(ROSA)/gen/gen.o 
-	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/gen/gen.o -lknde_local -ldbms_local -lsadm_local -lbtab_local -lotab_local -lutil -lbrok_local -llocal -ladrs_local -lknto_local $(LIBS) 
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/gen/gen.o -lknde_local -ldbms_local -lsadm_local -lbtab_local -lotab_local -lutil -lbrok_local -llocal -ladrs_local -lknto_local $(LIBS) $(LDLIBS) 
 	mv a.out ../gen/gen

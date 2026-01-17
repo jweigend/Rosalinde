@@ -12,7 +12,7 @@
 
 
 tt_knde_knto : $(ROSA)/src/adt/knto/tt_knde_knto.o
-	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/src/adt/knto/tt_knde_knto.o -lotab_local -lutil -lsadm_local -lbrok_local -llocal -ladrs_local -ldbms_local -lknto_local -lknde_local -lbtab_local $(LIBS) 
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/src/adt/knto/tt_knde_knto.o -lotab_local -lutil -lsadm_local -lbrok_local -llocal -ladrs_local -ldbms_local -lknto_local -lknde_local -lbtab_local $(LIBS) $(LDLIBS) 
 	mv a.out ../exe/$@
 
 

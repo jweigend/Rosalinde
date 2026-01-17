@@ -11,7 +11,7 @@
 # ------------------------------------------------------------------------
 
 tt_btab : $(ROSA)/src/btab/tt_btab.o
-	$(CC) $(CFLAGS) -L$(LIBDIR)  $(LIBS) $(ROSA)/src/btab/tt_btab.o -lbtab_local -lsadm_local -lbrok_local -lutil
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/src/btab/tt_btab.o -lbtab_local -lsadm_local -lbrok_local -lutil $(LIBS) $(LDLIBS)
 	mv a.out ../exe/$@ 
 
 $(ROSA)/src/btab/tt_btab.o : $(ROSA)/src/btab/tt_btab.c

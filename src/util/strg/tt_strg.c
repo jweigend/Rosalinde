@@ -11,26 +11,20 @@
 ---------------------------------------------------------------------------*/
 
 #include "strg.h"
+#include "except.h"
 #include "stdio.h"
+#include "stdlib.h"
+
+ENABLE_ERROR_HANDLING;
 
 #define HEAD(fnkname) printf("\n\nFUNKTION:\t%s\n",#fnkname);
 #define BESCHR(b) printf("BESCHREIBUNG:\t%s\n",b);
 
 void test_strg_db_in();
 
-ENABLE_ERROR_HANDLING;
-
 int main(void)
 {
-  int rc;
-
-  rc = CATCH;
-  if (rc) {
-    printf ("FATAL Error");
-    exit (-1);
-  }
-
-  printf("TESTTREIBER\n\n\n");
+  printf("TESTTREIBER STRG\n\n");
 
   test_strg_db_in();
 
