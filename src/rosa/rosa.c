@@ -79,6 +79,10 @@ main(argc, argv)
     	exit(-1);
     }
     broker = argv[2];
+    /* Adjust argc and argv for Tk_Main: pass program name and startup script */
+    /* argv[0] = program name, argv[1] = startup script (rosa.tk) */
+    argv[1] = "rosa.tk";
+    argc = 2;
     Tk_Main(argc, argv, Tcl_AppInit);
     return 0;			/* Needed only to prevent compiler warning. */
 }

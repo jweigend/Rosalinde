@@ -45,7 +45,7 @@ KNDE_SVC_PID=$!
 
 echo Starte GUI ...
 cd ../src/rosa
-rosa_rpc.tk $BROKER 2>rosa_rpc.log &  
+./rosa_rpc localhost $BROKER 2>rosa_rpc.log &  
 sleep 2
 ROSA_PID=$!
 

@@ -6,11 +6,10 @@
 # element name is the name of a command and the value is
 # a script that loads the command.
 
-set auto_index(dialog) "source $dir/tools.tcl"
-set auto_index(DLG_SelectBroker) "source $dir/dlg_sbro.dlg"
-set auto_index(DLG_ServerAdmin) "source $dir/dlg_sadm.dlg"
-set auto_index(DLG_CopyRight) "source $dir/dlg_copy.dlg"
-set auto_index(DLG_Suche_Konto) "source $dir/dlg_skto.dlg"
-set auto_index(DLG_Pflege_Kunden) "source $dir/dlg_pfku.dlg"
-set auto_index(DLG_Pflege_Konten) "source $dir/dlg_pfkt.dlg"
-set auto_index(DLG_AboutAE10) "source $dir/dlg_abou.dlg"
+set auto_index(DLG_AboutAE10) [list source [file join $dir dlg_abou.dlg]]
+set auto_index(DLG_CopyRight) [list source [file join $dir dlg_copy.dlg]]
+set auto_index(DLG_Pflege_Konten) [list source [file join $dir dlg_pfkt.dlg]]
+set auto_index(DLG_Pflege_Kunden) [list source [file join $dir dlg_pfku.dlg]]
+set auto_index(DLG_ServerAdmin) [list source [file join $dir dlg_sadm.dlg]]
+set auto_index(DLG_SelectBroker) [list source [file join $dir dlg_sbro.dlg]]
+set auto_index(DLG_Suche_Konto) [list source [file join $dir dlg_skto.dlg]]

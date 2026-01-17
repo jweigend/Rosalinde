@@ -8,6 +8,10 @@ exec rosa_rpc "$0" "$@"
 
 # Automatisches Update der benoetigten Files
 auto_mkindex . *.tcl *.dlg
+
+# Load tools.tcl explicitly to provide dialog procedure
+source tools.tcl
+
 set auto_path \
       [linsert $auto_path 0 .]
 

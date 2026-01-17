@@ -15,6 +15,10 @@ if {[llength [glob -nocomplain *.tcl]]} {
 if {[llength [glob -nocomplain *.dlg]]} {
   auto_mkindex . *.dlg
 }
+
+# Load tools.tcl explicitly to provide dialog procedure
+source tools.tcl
+
 set auto_path \
   [linsert $auto_path 0 .]
 if {[file exists tclIndex]} {

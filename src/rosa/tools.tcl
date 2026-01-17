@@ -14,9 +14,8 @@ proc dialog { w title text bitmap default args } {
     frame $w.bot -relief raised -bd 1
     pack $w.bot -side bottom -fill both
 
-    # Message und Buttons
-    message $w.top.msg -width 3i -text $text\
-            -font -Adobe-Times-Medium-R-Normal-*-140-*
+    # Message und Buttons - use simple font specification
+    message $w.top.msg -width 4i -text $text -font {Times 10}
     pack $w.top.msg -side right -expand 1 -fill both -padx 3m -pady 3m
     if {$bitmap != ""} {
         label $w.top.bitmap -bitmap $bitmap
