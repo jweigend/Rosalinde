@@ -15,7 +15,7 @@ knde_new_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_NEW, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_NEW, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -27,7 +27,7 @@ knde_init_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_INIT, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_INIT, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -39,7 +39,7 @@ knde_clear_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_CLEAR, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_CLEAR, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -51,7 +51,7 @@ knde_delete_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_DELETE, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_DELETE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -63,7 +63,7 @@ knde_set_name_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_SET_NAME, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_SET_NAME, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -75,7 +75,7 @@ knde_set_vorname_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_SET_VORNAME, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_SET_VORNAME, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -87,7 +87,7 @@ knde_set_anrede_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_SET_ANREDE, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_SET_ANREDE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -99,7 +99,7 @@ knde_set_adresse_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_SET_ADRESSE, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_SET_ADRESSE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -111,7 +111,7 @@ knde_get_name_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_GET_NAME, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_GET_NAME, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -123,7 +123,7 @@ knde_get_vorname_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_GET_VORNAME, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_GET_VORNAME, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -135,7 +135,7 @@ knde_get_rid_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_GET_RID, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_GET_RID, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -147,7 +147,7 @@ knde_get_konten_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_GET_KONTEN, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_GET_KONTEN, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -159,7 +159,7 @@ knde_get_anrede_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_GET_ANREDE, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_GET_ANREDE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -171,7 +171,7 @@ knde_get_adresse_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_GET_ADRESSE, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_GET_ADRESSE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -183,7 +183,7 @@ knde_find_by_key_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_FIND_BY_KEY, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_FIND_BY_KEY, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -195,7 +195,7 @@ knde_register_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_REGISTER, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_REGISTER, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -207,7 +207,7 @@ knde_unregister_1(rknd *argp, CLIENT *clnt)
 	static rknd clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNDE_UNREGISTER, (xdrproc_t) xdr_rknd, argp, (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNDE_UNREGISTER, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknd, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -219,7 +219,7 @@ dbms_commit_1(char **argp, CLIENT *clnt)
 	static short clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, DBMS_COMMIT, (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, DBMS_COMMIT, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -231,7 +231,7 @@ dbms_rollback_1(char **argp, CLIENT *clnt)
 	static short clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, DBMS_ROLLBACK, (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, DBMS_ROLLBACK, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -243,7 +243,7 @@ dbms_data_server_changed_1(void *argp, CLIENT *clnt)
 	static short clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, DBMS_DATA_SERVER_CHANGED, (xdrproc_t) xdr_void, argp, (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, DBMS_DATA_SERVER_CHANGED, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_void, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);

@@ -12,8 +12,12 @@
 
 /* Generische Uebergabestruktur fuer alle Funktionen */
 
+const MAX_CIDLENGTH = 255;
+const MAX_BANKNAME = 60;
+
 struct rknt  {
     long oid;                   /* Die OID des Proxys */
+
     string cid<MAX_CIDLENGTH>;  /* Die ClientID CID   */
 
     /* Vereinigungsmenge aller Aufrufparameter */
@@ -68,23 +72,23 @@ program R_KNTO {
 } = 0x32132486;
 
 #ifdef RPC_HDR
-%
-%#include "knto.h"
-%#include "cent.h"
-%#include "cmgr.h"
-%
-%#define R_KNTO_PROTO "tcp"
-%
-%int rpcgen_main ();
-%
-%   /* Enthaelt nur '\0' */
-%extern char xdr_required_nullstring;
-%
-%   /* Fuelle rknd mit \0 */
-%   /* XDR_STRING() benoetigt gueltige Zeiger (nicht NULL) */
-%#define rknt_init(r) memset ((r), '\0', sizeof (rknt));    \
+
+#include "knto.h"
+#include "cent.h"
+#include "cmgr.h"
+
+#define R_KNTO_PROTO "tcp"
+
+int rpcgen_main ();
+
+   /* Enthaelt nur '\0' */
+extern char xdr_required_nullstring;
+
+   /* Fuelle rknd mit \0 */
+   /* XDR_STRING() benoetigt gueltige Zeiger (nicht NULL) */
+#define rknt_init(r) memset ((r), '\0', sizeof (rknt));    \
          (r)->bankname = &xdr_required_nullstring;         \
          (r)->cid      = &xdr_required_nullstring;
-%
+
 #endif /* RPC_HDR */
 

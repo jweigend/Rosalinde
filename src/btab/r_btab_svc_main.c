@@ -16,6 +16,7 @@
 #include "sadm.h"
 
 #include <netdb.h>
+#include <unistd.h>
 
 ENABLE_ERROR_HANDLING;
 

@@ -18,10 +18,10 @@ include ../../make/env.mak
 #-------------------------------------------------------------------------
 
 rosa_local	: dlg_sbro.o dlg_main.o dlg_pfku.o dlg_admi.o dlg_pfko.o dlg_skto.o rosa.c
-	$(CC) $(CFLAGS) -DLOCAL -I$(TCL_INCLUDE) -L$(TCL_LIBDIR) dlg_sbro.o dlg_pfko.o dlg_skto.o dlg_main.o dlg_pfku.o dlg_admi.o rosa.c -o $@ -ltcl_dlg -lotab_local -lbtab_local -lsadm_local -lbrok_local -lknde_local -lknto_local -llocal -ladrs_local -lutil -ldbms_local $(TCL_LIBS) 
+	$(CC) $(CFLAGS) -DLOCAL -I$(TCL_INCLUDE) -L$(TCL_LIBDIR) dlg_sbro.o dlg_pfko.o dlg_skto.o dlg_main.o dlg_pfku.o dlg_admi.o rosa.c -o $@ -ltcl_dlg -lotab_local -lbtab_local -lsadm_local -lbrok_local -lknde_local -lknto_local -llocal -ladrs_local -lutil -ldbms_local $(TCL_LIBS) $(LDLIBS)
 
 rosa_rpc	: dlg_sbro.o dlg_main.o dlg_pfku_prx.o dlg_admi.o dlg_pfko.o dlg_skto.o rosa.c
-	$(CC) $(CFLAGS) -I$(TCL_INCLUDE) -L$(TCL_LIBDIR) dlg_sbro.o dlg_main.o dlg_pfko.o dlg_skto.o dlg_pfku_prx.o dlg_admi.o rosa.c -o $@  -ltcl_dlg -lutil -lotab_local -lbtab_rpc_clnt -lsadm_rpc -lbrok_rpc_clnt -lknde_rpc_clnt -lknto_rpc_clnt -ladrs_local -lcmgr_local -ldbms_rpc_clnt -lutil $(TCL_LIBS) 
+	$(CC) $(CFLAGS) -I$(TCL_INCLUDE) -L$(TCL_LIBDIR) dlg_sbro.o dlg_main.o dlg_pfko.o dlg_skto.o dlg_pfku_prx.o dlg_admi.o rosa.c -o $@  -ltcl_dlg -lutil -lotab_local -lbtab_rpc_clnt -lsadm_rpc -lbrok_rpc_clnt -lknde_rpc_clnt -lknto_rpc_clnt -ladrs_local -lcmgr_local -ldbms_rpc_clnt -lutil $(TCL_LIBS) $(LDLIBS)
 
 
 #-------------------------------------------------------------------------

@@ -1,7 +1,21 @@
 #
 # Codegenerierung fuer btab 
 #
-rpcgen -C r_btab.x
+cp r_btab.x r_btab.x.orig
+# Create a cleaned temporary .x removing legacy '%' lines and local includes
+tmp=$(mktemp /tmp/r_btab.XXXXXX.x)
+sed -E 's/^[[:space:]]*%//' r_btab.x.orig | sed '/^#include "/d' | sed '/^#ifdef RPC_HDR/,/^#endif/ d' > "$tmp"
+if rpcgen -C "$tmp"; then
+	echo rpcgen succeeded
+	# move generated files into place if present
+	mv r_btab.h ../../include 2>/dev/null || true
+	mv r_btab_clnt.c . 2>/dev/null || true
+	mv r_btab_svc.c . 2>/dev/null || true
+	mv r_btab_xdr.c . 2>/dev/null || true
+else
+	echo rpcgen failed; rm -f "$tmp"; mv r_btab.x.orig r_btab.x; exit 1
+fi
+rm -f "$tmp"
 
 # generiertes main () durch rpcgen_main() ersetzen ...
 

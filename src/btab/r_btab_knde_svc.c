@@ -149,7 +149,7 @@ r_btab_1(struct svc_req *rqstp, register SVCXPRT *transp)
 }
 
 int
-rpcgen_rpcgen_main(int argc, char **argv)
+rpcgen_main(int argc, char **argv)
 {
 	register SVCXPRT *transp;
 

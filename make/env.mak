@@ -13,11 +13,10 @@
 
 #
 # ROOT - Directory (edit this)
-#
 
-# ------------------------------------------------------------------------
-
-ROSA 	= $(HOME)/Rosalinde
+# Set ROSA to the project root for local builds (was $(HOME)/Rosalinde).
+# Using an absolute path keeps Make deterministic on modern systems.
+ROSA    = /home/johannes/Programieren/Rosalinde2026
 
 LIBDIR 	= $(ROSA)/lib
 
@@ -41,7 +40,8 @@ TCL_INCLUDE = $(INCLUDE) -I/usr/local/include -I/usr/openwin/include
 # C-Compiler
 #
 #CC 	= purify cc 
-CC		= cc
+# Use gcc on modern Linux hosts for better diagnostics
+CC		= gcc
 
 # -D_DEBUG fuer Memory-Debugging
 # -DRPC_SVC_FG  fuer SUN Foreground process
@@ -57,7 +57,7 @@ ARFLAGS = r
 # Static - libs
 LIBS 	=
 
-TCL_LIBS =  $(LIBS) -ltk4.0 -ltcl7.4 -lX11 -lm 
+TCL_LIBS =  $(LIBS) -ltk8.6 -ltcl8.6 -lX11 -lm 
 #TCL_LIBS = -ltk -ltcl -lX11 -lm
 # ------------------------------------------------------------------------
 
@@ -78,5 +78,6 @@ CFLAGS += -I/usr/include/tcl8.6
 LDLIBS += -ltk8.6 -ltcl8.6
 
 
-
+# Ensure legacy $(LIBS) includes modern LDLIBS (e.g. -ltirpc)
+LIBS += $(LDLIBS)
 # ------------------------------------------------------------------------

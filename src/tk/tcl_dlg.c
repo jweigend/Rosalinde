@@ -13,13 +13,15 @@
 
 #include "tcl_dlg.h"
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 
 /* Statische Variablen fuer die Verwaltung der Dialog-Prozeduren */
 /* Dieses dynamische array nimmt alle Dialog-Funktionen auf, die */
 /* mit RegisterDLGProc registriert wurden. Bei einem Aufruf eines */
 /* Dialoges wird die entsprechende Dialog-Funktion aus diesem */
-/* array gesucht, und fuer die Ausf’hrung verwendet. */
+/* array gesucht, und fuer die Ausfï¿½hrung verwendet. */
 typedef struct
 {
    TCL_DLG_PROC* dlg_proc;  /* Pointer auf die Dialog-Funktion */
@@ -33,9 +35,9 @@ static int tcl_dlg_proc_len  = 0;
 
 /* Funktion zum erzeugen eines Dialoges. Diese Funktion wird als */
 /* Commando bei TCL Registriert. (Commando sollte DIALOG_create */
-/* heižen!). Das Commando braucht einen Parameter, den Namen der */
+/* heiï¿½en!). Das Commando braucht einen Parameter, den Namen der */
 /* Dialogfunktion, welche zuvor mit RegisterDLGProc registriert wurde! */
-/* Der R’ckgabewert im TCL-Skript ist eine Art Handle auf den Dialog. */
+/* Der Rï¿½ckgabewert im TCL-Skript ist eine Art Handle auf den Dialog. */
 int TCL_Dialog_cmd(ClientData clientData, Tcl_Interp* interp, int argc, char* argv[])
 {
     TCL_Dialog* dialog;
@@ -61,18 +63,26 @@ int TCL_Dialog_cmd(ClientData clientData, Tcl_Interp* interp, int argc, char* ar
     /* des Kommandos ist die Adresse der Struktur. Der Name des Kommandos */
     /* interessiert nicht, da das Kommando in einer Variablen (im TCL-Skript) */
     /* gespeichert wird. */
-    // JWE 2025 TODO
-    //sprintf(interp->result, "%x", dialog);
-    //Tcl_CreateCommand(interp,                  /* Neues Cmd im Interpreter */
-    //                  interp->result,          /* Cmd erfolgreich */
-    //                  TCL_Dialog_object_cmd,   /* Pointer auf Cmd-Funktion */
-    //                  (ClientData)dialog,      /* Mit welchen Daten? */
-    //                  TCL_Dialog_delete);      /* Freigeben der Daten */
+    /* Create a unique command name for this dialog and register the
+       dispatcher `TCL_Dialog_object_cmd` with the dialog struct as
+       client data. Return the command name as the Tcl result so the
+       script can store it in a variable (e.g. `set dlgvar [DIALOG]`). */
+    {
+        char cmdname[64];
+        /* use pointer value to generate a reasonably unique name */
+        snprintf(cmdname, sizeof(cmdname), "__dlg_%p", (void*)dialog);
+        Tcl_CreateCommand(interp,
+                          cmdname,
+                          (Tcl_CmdProc*)TCL_Dialog_object_cmd,
+                          (ClientData)dialog,
+                          TCL_Dialog_delete);
+        Tcl_SetObjResult(interp, Tcl_NewStringObj(cmdname, -1));
+    }
     return TCL_OK;
 }
 
 
-/* Diese Funktion l÷scht eine Dialog-Struktur, und wird von TCL automatisch */
+/* Diese Funktion lï¿½scht eine Dialog-Struktur, und wird von TCL automatisch */
 /* zum richtigen Zeitpunkt aufgerufen! */
 void TCL_Dialog_delete(ClientData clientData)
 {
@@ -81,10 +91,10 @@ void TCL_Dialog_delete(ClientData clientData)
 }
 
 
-/* Diese Funktion ist der Event-Dispatcher f’r Dialoge/Fenster */
+/* Diese Funktion ist der Event-Dispatcher fï¿½r Dialoge/Fenster */
 /* In der Dialog-Struktur ist der Pointer auf die Dialogfunktion */
 /* abgelegt. Der Dispatcher setzt die Motif-Events in eigene Events */
-/* um und ’bergibt sie der Dialog-Funktion. Damit der C-Teil zugriff */
+/* um und ï¿½bergibt sie der Dialog-Funktion. Damit der C-Teil zugriff */
 /* auf den TCL-Interpreter hat, wird fuer jeden aufruf der Dialog- */
 /* Funktion der Interpreter mitgegeben. */
 int TCL_Dialog_object_cmd(ClientData clientData, Tcl_Interp* interp, int argc, char* argv[])
@@ -149,7 +159,7 @@ void Dialog_create(TCL_Dialog** dlg)
 }
 
 
-/* L÷schen einer Dialog-Struktur */
+/* Lï¿½schen einer Dialog-Struktur */
 void Dialog_delete(TCL_Dialog* dlg)
 {
     HWND hwnd;
@@ -188,8 +198,8 @@ void SetWindowLong(HWND* hwnd, int index, void* data)
     hwnd->data = data;
 }
 
-/* Registrieren einer Dialog-Funktion. Der Name dient als Schl’ssel
-   f’r sp„tere Aufrufe von Dialogen */
+/* Registrieren einer Dialog-Funktion. Der Name dient als Schlï¿½ssel
+   fï¿½r spï¿½tere Aufrufe von Dialogen */
 int RegisterDLGProc(char* dlg_name, TCL_DLG_PROC* dlg_proc)
 {
     TCL_DLG_Registration** tmp;
@@ -214,7 +224,7 @@ int RegisterDLGProc(char* dlg_name, TCL_DLG_PROC* dlg_proc)
         }
     }
 
-    /* Ab hier steht der Speicher auf jeden Fall zur Verf’gung! */
+    /* Ab hier steht der Speicher auf jeden Fall zur Verfï¿½gung! */
     reg = (TCL_DLG_Registration*)malloc(sizeof(TCL_DLG_Registration));
     if (reg)
     {

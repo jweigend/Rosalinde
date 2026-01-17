@@ -12,7 +12,7 @@
 
 
 r_brok_svc : $(ROSA)/src/brok/r_brok_svc.o
-	$(CC) $(CFLAGS) $(LIBS) -L$(LIBDIR) $(ROSA)/src/brok/r_brok_svc.o -lbrok_rpc_server -lutil
+	$(CC) $(CFLAGS) $(LIBS) -L$(LIBDIR) $(ROSA)/src/brok/r_brok_svc.o -lbrok_rpc_server -lutil $(LDLIBS)
 	mv a.out ../exe/$@ 
 
 

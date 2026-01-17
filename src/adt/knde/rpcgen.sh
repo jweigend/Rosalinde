@@ -1,7 +1,19 @@
 #
 # Codegenerierung fuer knde 
 #
-rpcgen -C r_knde.x
+cp r_knde.x r_knde.x.orig
+tmp=$(mktemp /tmp/r_knde.XXXXXX.x)
+sed -E 's/^[[:space:]]*%//' r_knde.x.orig | sed '/^#include "/d' | sed '/^#ifdef RPC_HDR/,/^#endif/ d' > "$tmp"
+if rpcgen -C "$tmp"; then
+	echo rpcgen succeeded
+	mv r_knde.h ../../include 2>/dev/null || true
+	mv r_knde_clnt.c . 2>/dev/null || true
+	mv r_knde_svc.c . 2>/dev/null || true
+	mv r_knde_xdr.c . 2>/dev/null || true
+else
+	echo rpcgen failed; rm -f "$tmp"; mv r_knde.x.orig r_knde.x; exit 1
+fi
+rm -f "$tmp"
 
 # generiertes main () durch rpcgen_main() ersetzen ...
 

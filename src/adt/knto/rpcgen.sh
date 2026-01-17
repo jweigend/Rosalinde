@@ -1,7 +1,19 @@
 #
 # Codegenerierung fuer konto 
 #
-rpcgen -C r_knto.x
+cp r_knto.x r_knto.x.orig
+tmp=$(mktemp /tmp/r_knto.XXXXXX.x)
+sed -E 's/^[[:space:]]*%//' r_knto.x.orig | sed '/^#include "/d' | sed '/^#ifdef RPC_HDR/,/^#endif/ d' > "$tmp"
+if rpcgen -C "$tmp"; then
+	echo rpcgen succeeded
+	mv r_knto.h ../../include 2>/dev/null || true
+	mv r_knto_clnt.c . 2>/dev/null || true
+	mv r_knto_svc.c . 2>/dev/null || true
+	mv r_knto_xdr.c . 2>/dev/null || true
+else
+	echo rpcgen failed; rm -f "$tmp"; mv r_knto.x.orig r_knto.x; exit 1
+fi
+rm -f "$tmp"
 
 # generiertes main () durch rpcgen_main() ersetzen ...
 

@@ -75,7 +75,7 @@ main(argc, argv)
 {
     if (argc!=3) 
     {
-    	LOG("Broker muß angegeben werden!\n");
+    	LOG("Broker muï¿½ angegeben werden!\n");
     	exit(-1);
     }
     broker = argv[2];
@@ -147,7 +147,7 @@ btab_open(knde_database, "KNDE.DAT", KNDE_DB_RECORDLENGTH, 100);
 
 ctab_init();
 
-Tcl_CreateCommand(interp, "DIALOG", TCL_Dialog_cmd, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+    Tcl_CreateCommand(interp, "DIALOG", (Tcl_CmdProc*)TCL_Dialog_cmd, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 
 RegisterDLGProc("MAIN",  DLGProc_Main);
 RegisterDLGProc("PFKU",  DLGProc_PflegeKunde);
@@ -166,6 +166,7 @@ RegisterDLGProc("SBRO",  DLGProc_SelectBroker);
      * then no user-specific startup file will be run under any conditions.
      */
 
-    tcl_RcFileName = "~/.wishrc";
+    /* modern Tcl may not export tcl_RcFileName symbol; set rc filename via Tcl variable */
+    Tcl_SetVar(interp, "tcl_rcFileName", "~/.wishrc", TCL_GLOBAL_ONLY);
     return TCL_OK;
 }

@@ -7,9 +7,21 @@ exec rosa_local "$0" "$@"
 ########################################################################
 
 # Automatisches Update der benoetigten Files
-auto_mkindex . *.tcl *.dlg
+# Call auto_mkindex only for patterns that actually match to avoid
+# glob errors on some Tcl builds.
+if {[llength [glob -nocomplain *.tcl]]} {
+  auto_mkindex . *.tcl
+}
+if {[llength [glob -nocomplain *.dlg]]} {
+  auto_mkindex . *.dlg
+}
 set auto_path \
-	[linsert $auto_path 0 .]
+  [linsert $auto_path 0 .]
+if {[file exists tclIndex]} {
+  # ensure $dir used by tclIndex points to this directory
+  set dir .
+  source tclIndex
+}
 
 #-----------------------------------------------------------------------
 # Hauptfenster

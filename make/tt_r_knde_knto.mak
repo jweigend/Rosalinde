@@ -16,7 +16,7 @@
 # dbms_commit, dbms_rollback, dbms_data_server_changed
 
 tt_r_knde_knto : $(ROSA)/src/adt/knto/tt_r_knde_knto.o
-	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/src/adt/knto/tt_r_knde_knto.o -lotab_local -lutil -lsadm_rpc -lbrok_rpc_clnt -ladrs_local -ldbms_rpc_clnt -lknto_rpc_clnt -lknde_rpc_clnt -lbtab_rpc_clnt -lcmgr_local $(LIBS)
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(ROSA)/src/adt/knto/tt_r_knde_knto.o -lotab_local -lutil -lsadm_rpc -lbrok_rpc_clnt -ladrs_local -ldbms_rpc_clnt -lknto_rpc_clnt -lknde_rpc_clnt -lbtab_rpc_clnt -lcmgr_local $(LIBS) $(LDLIBS)
 	mv a.out ../exe/$@ 
 
 

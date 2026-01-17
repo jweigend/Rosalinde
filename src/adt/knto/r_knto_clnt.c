@@ -15,7 +15,7 @@ knto_new_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_NEW, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_NEW, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -27,7 +27,7 @@ knto_init_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_INIT, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_INIT, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -39,7 +39,7 @@ knto_clear_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_CLEAR, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_CLEAR, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -51,7 +51,7 @@ knto_delete_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_DELETE, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_DELETE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -63,7 +63,7 @@ knto_set_konto_nummer_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_SET_KONTO_NUMMER, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_SET_KONTO_NUMMER, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -75,7 +75,7 @@ knto_set_blz_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_SET_BLZ, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_SET_BLZ, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -87,7 +87,7 @@ knto_set_bankname_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_SET_BANKNAME, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_SET_BANKNAME, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -99,7 +99,7 @@ knto_set_betrag_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_SET_BETRAG, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_SET_BETRAG, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -111,7 +111,7 @@ knto_set_kunde_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_SET_KUNDE, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_SET_KUNDE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -123,7 +123,7 @@ knto_set_unassigned_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_SET_UNASSIGNED, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_SET_UNASSIGNED, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -135,7 +135,7 @@ knto_get_kunde_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_GET_KUNDE, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_GET_KUNDE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -147,7 +147,7 @@ knto_get_konto_nummer_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_GET_KONTO_NUMMER, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_GET_KONTO_NUMMER, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -159,7 +159,7 @@ knto_get_blz_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_GET_BLZ, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_GET_BLZ, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -171,7 +171,7 @@ knto_get_bankname_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_GET_BANKNAME, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_GET_BANKNAME, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -183,7 +183,7 @@ knto_get_betrag_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_GET_BETRAG, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_GET_BETRAG, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -195,7 +195,7 @@ knto_einzahlen_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_EINZAHLEN, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_EINZAHLEN, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -207,7 +207,7 @@ knto_auszahlen_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_AUSZAHLEN, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_AUSZAHLEN, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -219,7 +219,7 @@ knto_find_by_key_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_FIND_BY_KEY, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_FIND_BY_KEY, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -231,7 +231,7 @@ knto_find_by_kunde_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_FIND_BY_KUNDE, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_FIND_BY_KUNDE, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -243,7 +243,7 @@ knto_find_unassigned_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_FIND_UNASSIGNED, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_FIND_UNASSIGNED, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -255,7 +255,7 @@ knto_get_rid_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_GET_RID, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_GET_RID, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -267,7 +267,7 @@ knto_register_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_REGISTER, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_REGISTER, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -279,7 +279,7 @@ knto_unregister_1(rknt *argp, CLIENT *clnt)
 	static rknt clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, KNTO_UNREGISTER, (xdrproc_t) xdr_rknt, argp, (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, KNTO_UNREGISTER, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_rknt, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -292,7 +292,7 @@ dbms_commit_1(char **argp, CLIENT *clnt)
 	static short clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, DBMS_COMMIT, (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, DBMS_COMMIT, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -304,7 +304,7 @@ dbms_rollback_1(char **argp, CLIENT *clnt)
 	static short clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, DBMS_ROLLBACK, (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, DBMS_ROLLBACK, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_wrapstring, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
@@ -316,7 +316,7 @@ dbms_data_server_changed_1(void *argp, CLIENT *clnt)
 	static short clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, DBMS_DATA_SERVER_CHANGED, (xdrproc_t) xdr_void, argp, (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
+	if (clnt_call(clnt, DBMS_DATA_SERVER_CHANGED, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_void, argp, (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) (xdrproc_t) xdr_short, &clnt_res, TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);

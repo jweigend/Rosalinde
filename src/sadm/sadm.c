@@ -155,13 +155,23 @@ CLIENT * sadm_get_serverhandle (char * svcn) {
 
     rc = brok_bind (svcn, &b);
 
-    if (rc != OK) return NULL;
+    if (rc != OK) {
+        fprintf(stderr, "[SADM]: brok_bind failed for svc='%s' (rc=%d), broker='%s'\n",
+                svcn, (int) rc, derServerAdministrator.brokerhost);
+        return NULL;
+    }
 
         /* Der Broker hat einen Eintrag zurueckgegeben ... */
 
     cl = clnt_create (bent_get_host (&b),
         bent_get_prgnr (&b), bent_get_versnr (&b), bent_get_proto (&b));
-    if (! cl) return NULL;
+    if (! cl) {
+        /* Provide clearer diagnostics when client creation fails */
+        fprintf(stderr, "[SADM]: clnt_create failed for host=%s prog=%ld ver=%ld proto=%s\n",
+                bent_get_host(&b), (long) bent_get_prgnr(&b), (long) bent_get_versnr(&b), bent_get_proto(&b));
+        clnt_pcreateerror("sadm_get_serverhandle");
+        return NULL;
+    }
 
     if (sadm_ping_server (cl) != OK) {
 
