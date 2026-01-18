@@ -75,6 +75,9 @@ The Tcl/Tk GUI (`rosa_local`, `rosa_rpc`) provides:
 - **Utility procedures** — Shared dialog infrastructure (`tools.tcl` provides the `dialog` command)
 - **RPC integration** — The `tcl_dlg.c` module bridges Tcl and C, enabling GUI callbacks to invoke C functions
 
+**Architecture Diagram:**
+See [doc/architecture.pdf](doc/architecture.pdf) for detailed system architecture documentation.
+
 ### Abstract Data Types (ADT)
 
 The `src/adt/` directory contains abstract data type implementations:
@@ -210,6 +213,11 @@ Tcl/Tk GUI notes
 
 The GUI implementation demonstrates sophisticated 1990s UI programming patterns:
 
+**GUI Screenshot:**
+![Rosalinde UI](doc/UI.png)
+
+*The Tcl/Tk-based customer and account management interface*
+
 **Dialog System:**
 - Dialog definitions stored in `.dlg` files (e.g., `dlg_copy.dlg`, `dlg_abou.dlg`)
 - Each dialog file contains a Tcl procedure that builds and displays the dialog
@@ -295,10 +303,11 @@ License and credits
 -------------------
 
 **Original Development:**
-- Concept and Design: Prof. Dr. Johannes Siedersleben
+- Concept and Design: Prof. Dr. Johannes Siedersleben, Dipl.-Inf. Johannes Weigend
 - Implementation: Johannes Weigend, Christian Stoellinger
 - Fachhochschule Rosenheim, Anwendungsentwicklung (Distributed Systems)
 - Developed: March–July 1996
+- **Thesis:** See [doc/diplomarbeit.pdf](doc/diplomarbeit.pdf) for the complete diploma thesis documenting the design and implementation
 
 **Modern Port (2026):**
 - Portability fixes and modernization for Linux/Tcl 8.6
