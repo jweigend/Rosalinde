@@ -12,11 +12,14 @@
 
 
 #
-# ROOT - Directory (edit this)
+# ROOT - Directory (automatically determined)
 
-# Set ROSA to the project root for local builds (was $(HOME)/Rosalinde).
-# Using an absolute path keeps Make deterministic on modern systems.
-ROSA    = /home/johannes/Programieren/Rosalinde2026
+# Set ROSA to the project root directory
+# This file is located in the make/ subdirectory, so we go one level up
+# $(dir $(abspath $(firstword $(MAKEFILE_LIST)))) gets the directory of this file
+# Using $(abspath ...) ensures we handle both absolute and relative paths
+# The patsubst removes any trailing slash
+ROSA = $(patsubst %/,%,$(abspath $(dir $(lastword $(MAKEFILE_LIST)))..))
 
 LIBDIR 	= $(ROSA)/lib
 
