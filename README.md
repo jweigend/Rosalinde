@@ -1,4 +1,6 @@
-Rosalinde (legacy C/Tcl/Tk RPC system)
+ROSALINDE - Rosenheim Application Link in a Distributed Environment 
+
+A legacy C/Tcl/Tk RPC system
 =====================================
 
 Overview
